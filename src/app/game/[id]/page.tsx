@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Game } from "../../../../utils/types/game";
 import { Grid } from "@/components/grid";
-import next, { Metadata } from "next";
+import  { Metadata } from "next";
 
 interface ParamsUrl {
     params: {
@@ -11,9 +11,9 @@ interface ParamsUrl {
     }
 }
 
-export async function generateMetadata ({params}:ParamsUrl):Promise<Metadata> {
+export async function generateMetadata ({params:{id}}:{params:{id:string}}):Promise<Metadata> {
     try {
-        const response: Game = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game&id=${params.id}`, { next: { revalidate: 60 } })
+        const response: Game = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game&id=${id}`, { next: { revalidate: 60 } })
             .then((res) => res.json())
             .catch(() => {
                 return {
