@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaUser } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
-import logo from "../../../public/logo.svg"
+import Logo from "../../../public/logo.svg"
 import Image from "next/image";
 import { LiaGamepadSolid } from "react-icons/lia";
 
@@ -15,7 +15,7 @@ export function Header() {
                 <nav className="  flex gap-5 items-center justify-center">
                     <Link className="text-2xl text-black font-medium" href={"/"}>
 
-                        <Image src={logo} priority={true} alt="Imagem do meu header" quality={100} className="w-full" />
+                        <Image src={Logo} priority={true} alt="Imagem do meu header" quality={100} className="w-full" />
                     </Link>
 
                     <Link href={"/"}>Jogos</Link>

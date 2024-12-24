@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Game } from "../../../../utils/types/game";
 import { Grid } from "@/components/grid";
 import  { Metadata } from "next";
+import { pages } from "next/dist/build/templates/app-page";
 
 interface ParamsUrl {
     params: {
@@ -11,9 +12,15 @@ interface ParamsUrl {
     }
 }
 
-export async function generateMetadata ({params:{id}}:{params:{id:string}}):Promise<Metadata> {
+interface ParamsUrl {
+    params: {
+        id: string
+    }
+}
+
+export async function generateMetadata ({params}:ParamsUrl):Promise<Metadata> {
     try {
-        const response: Game = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game&id=${id}`, { next: { revalidate: 60 } })
+        const response: Game = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game&id=${params.id}`, { next: { revalidate: 60 } })
             .then((res) => res.json())
             .catch(() => {
                 return {
@@ -49,8 +56,15 @@ export async function generateMetadata ({params:{id}}:{params:{id:string}}):Prom
 
 }
 
+async function Page({ params }:ParamsUrl) {
+    
+    const { id } = await params
+    return <p>ID: {id}</p>
+  }
+
 
 async function getDetail(id: string) {
+
 
     const response = await fetch(`${process.env.API_ID}/next-api/?api=game&id=${id}`, { next: { revalidate: 60 } })
 
@@ -139,3 +153,10 @@ export default async function Detail({ params: { id } }: { params: { id: string 
 
     )
 }
+
+
+
+
+
+
+
