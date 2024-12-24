@@ -15,9 +15,9 @@ try{
 }
 
 
-export default async function Tittle({ params: { tittle } }: { params: { tittle: string } }) {
+export default async function Tittle({ params }: { params:Promise<{tittle:string}> }) {
 
-    
+    const {tittle} = await params
 
     const item: Game[] = await getItem(tittle)
 

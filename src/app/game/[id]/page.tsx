@@ -3,21 +3,29 @@ import Image from "next/image";
 import Link from "next/link";
 import { Game } from "../../../../utils/types/game";
 import { Grid } from "@/components/grid";
-import { Metadata } from "next";
+import  { Metadata } from "next";
 import { pages } from "next/dist/build/templates/app-page";
 
 interface ParamsUrl {
-    params: Promise<
-        {
-            id: string
-        }>
+    params: {
+        id: string
+    }
+}
+
+interface ParamsUrl {
+    params: {
+        id: string
+    }
 }
 
 
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+
+
+export async function generateMetadata ({params}:{params:Promise<{id:string}>}):Promise<Metadata> {
     try {
-        const { id } = await params
+        
+        const {id} = await params
 
         const response: Game = await fetch(`${process.env.NEXT_API_URL}/next-api/?api=game&id=${id}`, { next: { revalidate: 60 } })
             .then((res) => res.json())
@@ -44,9 +52,9 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
                 }
             }
         }
+        
 
-
-
+        
     } catch {
         return {
             title: "DalyGames - encontre os melhores jogos para se divertir"
@@ -71,11 +79,12 @@ async function randomGame() {
     return response.json()
 }
 
-export default async function Detail({ params }: { params: Promise<{ id: string }> }) {
+export default async function Detail({params}:{params:Promise<{id:string}>}) {
 
-    const { id } = await params
+   try{
+    const {id} = await params
 
-
+   
 
     const detailGame: Game = await getDetail(id)
 
@@ -150,6 +159,9 @@ export default async function Detail({ params }: { params: Promise<{ id: string 
         </main>
 
     )
+   }catch(error){
+    console.log(error)
+   }
 }
 
 
