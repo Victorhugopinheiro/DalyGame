@@ -57,11 +57,6 @@ export async function generateMetadata ({params}:ParamsUrl):Promise<Metadata> {
 
 }
 
-async function Page({ params }:ParamsUrl) {
-    
-    const { id } = await params
-    return <p>ID: {id}</p>
-  }
 
 
 async function getDetail(id: string) {
@@ -78,7 +73,7 @@ async function randomGame() {
     return response.json()
 }
 
-export default async function Detail({ params: { id } }: { params: { id: string } }):Promise<ReactNode> {
+export default async function Detail({ params: { id } }: { params: { id: string } }):Promise<ReactNode>{
 
     const detailGame: Game = await getDetail(id)
 
