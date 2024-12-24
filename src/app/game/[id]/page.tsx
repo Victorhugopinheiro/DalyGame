@@ -5,6 +5,7 @@ import { Game } from "../../../../utils/types/game";
 import { Grid } from "@/components/grid";
 import  { Metadata } from "next";
 import { pages } from "next/dist/build/templates/app-page";
+import { ReactNode } from "react";
 
 interface ParamsUrl {
     params: {
@@ -77,7 +78,7 @@ async function randomGame() {
     return response.json()
 }
 
-export default async function Detail({ params: { id } }: { params: { id: string } }) {
+export default async function Detail({ params: { id } }: { params: { id: string } }):Promise<ReactNode> {
 
     const detailGame: Game = await getDetail(id)
 
